@@ -2,8 +2,13 @@
 import { IoIosSearch } from "react-icons/io";
 import { CiMenuFries } from "react-icons/ci";
 import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import NewContext from "../../Firebase/Context/CreateContext";
+import Logo from "/assets/navLogo.png"
 
 const Navbar = () => {
+  const { user, logOut } = useContext(NewContext);
+console.log(user)
   return (
     <div className="navbar">
       <div className="navbar-start">
@@ -27,7 +32,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm text-base font-normal gap-3 dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm text-lg font-medium gap-3 dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <NavLink>
               <li className="before:w-0 hover:before:w-full before:bg-[#3B9DF8] before:h-[2px] before:transition-all before:duration-300 before:absolute relative before:rounded-full before:bottom-[-2px] hover:text-[#3B9DF8] transition-all duration-300 before:left-0 cursor-pointer capitalize">
@@ -41,7 +46,8 @@ const Navbar = () => {
             </NavLink>
           </ul>
         </div>
-        <Link className="text-3xl font-bold">
+        <Link to="/" className="text-xl md:text-2xl lg:text-5xl text-[#3C65F5] font-bold flex items-center">
+        <img src={Logo} alt="" />
           Job portals
         </Link>
       </div>
@@ -60,7 +66,19 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <button onClick={logOut} className="text-xl font-medium p-3 bg-[#3C65F5] rounded-lg cursor-pointer hover:bg-gray-200">Logout</button>
+        ) : (
+          <>
+          <Link to="/register" className="text-xl font-medium p-3 bg-[#3C65F5] rounded-lg cursor-pointer hover:bg-gray-200">
+            Register
+          </Link>
+          <Link to="/login" className="text-xl font-medium p-3 ml-7 bg-[#3C65F5] rounded-lg cursor-pointer hover:bg-gray-200">
+            Login
+          </Link>
+          </>
+        )}
+        
       </div>
     </div>
   );

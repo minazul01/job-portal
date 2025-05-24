@@ -1,3 +1,11 @@
+# important file ignore 
+
+src/firebase/firebaseAuth.js
+.env
+
+
+
+
 # Logs
 logs
 *.log
