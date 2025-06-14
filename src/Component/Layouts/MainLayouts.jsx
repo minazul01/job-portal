@@ -3,6 +3,7 @@ import ResponsiveNavbar from "../Pages/Navbar/Navbar";
 import "../../Component/Layouts/index.css";
 import { Outlet } from "react-router-dom";
 import Footer from "../Pages/Footer/Footer";
+import Banner from "../Pages/Banner/Banner";
 const MainLayouts = () => {
   return (
     <div className="bg-[#F2F6FD]">

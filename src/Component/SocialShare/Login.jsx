@@ -1,11 +1,17 @@
 import Lottie from "lottie-react";
 import loginAnimation from "../../assets/Lottie/login-animation.json";
-import { useContext } from "react";
+import { use, useContext } from "react";
 import NewContext from "../Firebase/Context/CreateContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const { SignIn } = useContext(NewContext);
- 
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const form = location?.state || "/";
+
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -13,7 +19,12 @@ const Login = () => {
 
     SignIn(email, password)
       .then((result) => {
-        console.log("Login successful:", result.user);
+        console.log("Login successful:", result.user.email);
+        const user = { email: result.user.email };
+        console.log(user)
+        axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+          .then((res) => console.log(res.data));
+        // navigate(form)
       })
       .catch((err) => {
         console.error("Login error:", err.message);

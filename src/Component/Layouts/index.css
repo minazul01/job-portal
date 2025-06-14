@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* .active {
+  background-color: #007bff;
+  color: white;
+} */
